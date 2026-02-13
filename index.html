@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist Docente: Il Documento Perfetto</title>
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --primary-bg: #e8f0fe;
+            --success: #1e8e3e;
+            --error: #d93025;
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-main: #202124;
+            --text-secondary: #5f6368;
+            --border: #dadce0;
+            --radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 100px;
+        }
+
+        header {
+            background: white;
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            min-height: 80px;
+        }
+
+        .header-text {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 5px;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        #reset-btn {
+            position: absolute;
+            right: 0;
+            background: #fce8e6;
+            color: var(--error);
+            border: 1px solid #fad2cf;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        #reset-btn:hover {
+            background: var(--error);
+            color: white;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Category Section */
+        .category-section {
+            margin-top: 60px;
+            margin-bottom: 40px;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--primary-bg);
+        }
+
+        .category-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Sub-item Checklist Compatta */
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 15px;
+        }
+
+        .checklist-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .checklist-item:hover {
+            border-color: var(--primary);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .checklist-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .checklist-item.completed .checklist-checkbox {
+            background: var(--success);
+            border-color: var(--success);
+        }
+
+        .checklist-item.completed .checklist-title {
+            color: var(--success);
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+
+        .checklist-checkbox i {
+            display: none;
+            color: white;
+            width: 16px;
+            height: 16px;
+        }
+
+        .checklist-item.completed .checklist-checkbox i {
+            display: block;
+        }
+
+        .checklist-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            flex-grow: 1;
+            color: var(--text-main);
+            cursor: pointer;
+            line-height: 1.3;
+        }
+
+        .info-btn {
+            color: var(--text-secondary);
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+
+        .info-btn:hover {
+            background: var(--primary-bg);
+            color: var(--primary);
+        }
+
+        /* Modal per Approfondimento */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: none;
+            overflow-y: auto;
+            padding: 40px 20px;
+        }
+
+        .modal-overlay.active {
+            display: block;
+        }
+
+        .modal-container {
+            background: var(--bg);
+            max-width: 1400px;
+            margin: 0 auto;
+            border-radius: 20px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            padding: 30px 40px;
+            background: white;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-right: 40px;
+        }
+
+        .close-modal {
+            width: 44px;
+            height: 44px;
+            background: #eee;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .close-modal:hover {
+            background: var(--error);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        /* Real-world document mocks */
+        .doc-p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 18px;
+            text-align: justify;
+        }
+
+        .doc-title {
+            display: block;
+            font-weight: 800;
+            font-size: 28pt;
+            margin-bottom: 25px;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .doc-h1 {
+            display: block;
+            font-weight: 700;
+            font-size: 22pt;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #333;
+            border-bottom: 1px solid #eee;
+        }
+
+        .doc-link {
+            color: #1a73e8;
+            text-decoration: underline;
+        }
+
+        .explanation {
+            background: var(--primary-bg);
+            color: #0b57d0;
+            padding: 20px 25px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            font-weight: 500;
+            border-left: 5px solid var(--primary);
+        }
+
+        .examples-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .example-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            font-weight: 800;
+            padding: 6px 14px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            width: fit-content;
+            text-transform: uppercase;
+        }
+
+        .label-neg {
+            background: #fce8e6;
+            color: var(--error);
+        }
+
+        .label-pos {
+            background: #e6f4ea;
+            color: var(--success);
+        }
+
+        .example-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .document-box {
+            background: white;
+            border: 1px solid var(--border);
+            border-top: 5px solid #ddd;
+            padding: 40px;
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .examples-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-content">
+            <div class="header-text">
+                <h1>Checklist Docente</h1>
+                <p class="subtitle">Guida rapida per la creazione del documento perfetto</p>
+            </div>
+            <button id="reset-btn" onclick="resetChecklist()">
+                <i data-lucide="rotate-ccw"></i>
+                Resetta Checklist
+            </button>
+        </div>
+    </header>
+
+    <div class="container" id="checklist-container">
+        <!-- Contenuto generato via JS per comodità di gestione o scritto a mano -->
+    </div>
+
+    <!-- Modal Overlay per Approfondimento -->
+    <div id="modal-overlay" class="modal-overlay" onclick="closeModal()">
+        <div class="modal-container" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2 id="modal-title">Titolo Regola</h2>
+                <div class="close-modal" onclick="closeModal()">
+                    <i data-lucide="x"></i>
+                </div>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Contenuto dinamico -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const data = [
+            {
+                category: "1️⃣ Usa una struttura chiara e leggibile",
+                items: [
+                    {
+                        title: "Evita blocchi di testo troppo lunghi, preferisci paragrafi brevi (5 - 6 frasi circa).",
+                        explanation: "Un 'muro di testo' respinge il lettore. Dividere in paragrafi dà ritmo alla lettura e permette alla mente di fare una pausa logica tra un concetto e l'altro.",
+                        bad: "<div class='doc-p'>L'architettura di Von Neumann rappresenta la base fondamentale su cui sono costruiti quasi tutti i computer moderni che utilizziamo quotidianamente sia per lavoro che per svago e si basa sull'idea rivoluzionaria di memorizzare sia i dati che le istruzioni all'interno della stessa memoria principale permettendo così al processore di accedere a entrambi in modo sequenziale attraverso l'uso di bus dedicati che trasportano l'informazione tra la CPU e i vari componenti del sistema come la memoria RAM e i dispositivi di input e output. In assenza di questo modello i computer dell'epoca dovevano essere riprogrammati manualmente modificando fisicamente i circuiti o scambiando cavi di collegamento rendendo ogni operazione estremamente lenta e complessa mentre oggi grazie alla flessibilità di questa architettura possiamo passare da un videogioco a un software di videoscrittura in frazioni di secondo senza dover minimamente intervenire sull'hardware sottostante che rimane lo stesso per ogni applicazione. Nonostante la sua efficienza però il modello presenta un limite noto come collo di bottiglia di Von Neumann dovuto al fatto che il bus di comunicazione può trasportare solo una piccola quantità di dati alla volta costringendo spesso la potente CPU ad attendere che la memoria le fornisca le istruzioni necessarie per proseguire l'elaborazione rallentando le prestazioni globali del sistema specialmente nelle applicazioni moderne che richiedono il processamento di enormi moli di dati in tempo reale come l'intelligenza artificiale o il rendering grafico avanzato che spingono l'architettura ai suoi limiti fisici costringendo i progettisti a trovare soluzioni sempre più ingegnose per aggirare questo ostacolo storico.</div>",
+                        good: "<div class='doc-p'>L'architettura di Von Neumann rappresenta la base fondamentale su cui sono costruiti quasi tutti i computer moderni che utilizziamo quotidianamente sia per lavoro che per svago e si basa sull'idea rivoluzionaria di memorizzare sia i dati che le istruzioni all'interno della stessa memoria principale permettendo così al processore di accedere a entrambi in modo sequenziale attraverso l'uso di bus dedicati che trasportano l'informazione tra la CPU e i vari componenti del sistema come la memoria RAM e i dispositivi di input e output.</div><div class='doc-p'>In assenza di questo modello i computer dell'epoca dovevano essere riprogrammati manualmente modificando fisicamente i circuiti o scambiando cavi di collegamento rendendo ogni operazione estremamente lenta e complessa mentre oggi grazie alla flessibilità di questa architettura possiamo passare da un videogioco a un software di videoscrittura in frazioni di secondo senza dover minimamente intervenire sull'hardware sottostante che rimane lo stesso per ogni applicazione.</div><div class='doc-p'>Nonostante la sua efficienza però il modello presenta un limite noto come collo di bottiglia di Von Neumann dovuto al fatto che il bus di comunicazione può trasportare solo una piccola quantità di dati alla volta costringendo spesso la potente CPU ad attendere che la memoria le fornisca le istruzioni necessarie per proseguire l'elaborazione rallentando le prestazioni globali del sistema specialmente nelle applicazioni moderne che richiedono il processamento di enormi moli di dati in tempo reale come l'intelligenza artificiale o il rendering grafico avanzato che spingono l'architettura ai suoi limiti fisici costringendo i progettisti a trovare soluzioni sempre più ingegnose per aggirare questo ostacolo storico.</div>"
+                    },
+                    {
+                        title: "Usa titolo, sottotitolo e intestazioni di diverso livello per organizzare il contenuto.",
+                        explanation: "I titoli sono i cartelli stradali del tuo documento. Aiutano il lettore a capire subito di cosa parla una sezione senza dover leggere tutto.",
+                        bad: "<div class='doc-p'><b>L'Hardware del PC<br> La CPU <br> </b> In questo esempio usiamo solo il grassetto all'inizio del paragrafo invece di un vero titolo, rendendo difficile scorrere il documento per trovare le informazioni.</div>",
+                        good: "<span class='doc-title'>L'Hardware del PC</span><span class='doc-h1'>1. La CPU (Processore)</span><div class='doc-p'>Utilizzando titoli e sottotitoli chiari, la struttura del documento diventa immediatamente comprensibile a colpo d'occhio.</div>"
+                    },
+                    {
+                        title: "Se il documento è lungo, aggiungi un sommario con link alle sezioni.",
+                        explanation: "Se il tuo lavoro supera le 3-4 pagine, un sommario permette di saltare direttamente alla parte di interesse. È una forma di cortesia verso il lettore.",
+                        bad: "<div class='doc-p'><b>Sommario:</b><br>1. Introduzione<br>2. Storia dei calcolatori<br>3. Componenti Hardware<br>4. Intelligenza Artificiale<br><br>Per quanto in questo esempio il sommario sia presente, le voci  sono scritte una sopra l'altra in modo semplice, senza link ipertestuali e senza indicare i numeri di pagina, risultando poco professionali e difficili da navigare.</div>",
+                        good: `<div style='background:#f9f9f9; padding:25px; border:1px solid #ddd; font-family:Inter, sans-serif;'>
+                                <div style='font-size:24px; font-weight:bold; margin-bottom:20px; text-align:center;'>Sommario</div>
+                                <style>
+                                    .toc-item { display: flex; align-items: baseline; margin-bottom: 8px; font-size: 16px; }
+                                    .toc-dots { flex-grow: 1; border-bottom: 2px dotted #ccc; margin: 0 10px; position: relative; top: -4px; }
+                                    .toc-sub { margin-left: 30px; }
+                                    .toc-page { width: 70px; flex-shrink: 0; text-align: left; }
+                                </style>
+                                <div class="toc-item"><span>1. Introduzione</span><div class="toc-dots"></div><span class="toc-page">pag. 1</span></div>
+                                <div class="toc-item"><span>2. Storia dei calcolatori</span><div class="toc-dots"></div><span class="toc-page">pag. 3</span></div>
+                                <div class="toc-item toc-sub"><span>2.1 L'era meccanica</span><div class="toc-dots"></div><span class="toc-page">pag. 4</span></div>
+                                <div class="toc-item toc-sub"><span>2.2 L'era digitale</span><div class="toc-dots"></div><span class="toc-page">pag. 7</span></div>
+                                <div class="toc-item"><span>3. Componenti Hardware</span><div class="toc-dots"></div><span class="toc-page">pag. 10</span></div>
+                                <div class="toc-item toc-sub"><span>3.1 La CPU</span><div class="toc-dots"></div><span class="toc-page">pag. 12</span></div>
+                                <div class="toc-item"><span>4. Intelligenza Artificiale</span><div class="toc-dots"></div><span class="toc-page">pag. 25</span></div>
+                               </div>`
+                    }
+                ]
+            },
+            {
+                category: "2️⃣ Scegli il font in modo efficace",
+                items: [
+                    {
+                        title: "Se il documento è digitale, preferisci font senza grazie (Arial, Roboto, Calibri, ...)",
+                        explanation: "A differenza della carta stampata dove sono meglio font con grazie (Times New Roman, Garamond, Georgia, ...), sugli schermi i font lineari risultano molto più nitidi e stancano meno la vista.",
+                        bad: "<div style='font-family:\"Times New Roman\", serif; line-height:1.4;'>In questo esempio utilizziamo un font 'con grazie'. Nota come i piccoli tratti alle estremità delle lettere rendano il testo meno nitido su uno schermo.</div>",
+                        good: "<div style='font-family:\"Arial\", sans-serif; line-height:1.4;'>Utilizzando un font 'senza grazie' come Arial, il testo appare pulito e moderno, garantendo una lettura molto più riposante a video.</div>"
+                    },
+                    {
+                        title: "Mantieni la grandezza del testo tra 10 e 12 pt e quella delle intestazioni tra 14 e 18 pt.",
+                        explanation: "Esiste un equilibrio: troppo grande sembra un libro per l'infanzia, troppo piccolo richiede la lente d'ingrandimento. Segui gli standard professionali.",
+                        bad: "<div style='font-size:9pt; font-weight:bold;'>Intestazione troppo piccola (9pt)</div><div style='font-size:7pt;'>Questo paragrafo ha un font da 7pt: è decisamente troppo piccolo per essere letto senza affaticare gli occhi.</div><div style='margin-top:20px; font-size:40pt; font-weight:bold;'>INTESTAZIONE GIGANTE (40pt)</div><div style='font-size:24pt;'>Questo testo invece è da 24pt: è troppo grande, spreca spazio e dà al documento un aspetto poco professionale.</div>",
+                        good: "<div style='font-size:16pt; font-weight:bold; margin-bottom:10px;'>Intestazione Corretta (16pt)</div><div style='font-size:11pt;'>In questo esempio, l'intestazione e il corpo del testo (11pt) rispettano le proporzioni ideali, garantendo un'ottima leggibilità e un aspetto equilibrato.</div>"
+                    },
+                    {
+                        title: "Differenzia i livelli delle intestazioni tramite dimensione, grassetto o colore.",
+                        explanation: "Capitolo, Paragrafo e Sotto-paragrafo devono essere visivamente distinti per far capire la gerarchia delle informazioni.",
+                        bad: "<div style='font-weight:bold;'>LA STORIA DEL PC.</div><div style='font-weight:bold;'>I PRIMI MODELLI.</div><div class='doc-p'>In questo caso, titolo e sottotitolo sono visivamente identici: il lettore non riesce a capire quale sezione sia contenuta all'interno dell'altra.</div>",
+                        good: "<div style='font-size:24pt; font-weight:800; color:#1a73e8; margin-bottom:15px;'>LA STORIA DEL PC.</div><div style='font-size:18pt; font-weight:700; color:#444; margin-bottom:10px;'>I PRIMI MODELLI.</div><div class='doc-p'>Grazie alla chiara distinzione visiva, la gerarchia delle informazioni è immediatamente comprensibile a colpo d'occhio.</div>"
+                    },
+                    {
+                        title: "Evita font decorativi e colori per i paragrafi, da utilizzare solo per titoli o piccole parti.",
+                        explanation: "I font 'strani' rendono il documento infantile. Il colore deve servire a evidenziare e per piccole parti di testo, non a decorare casualmente.",
+                        bad: "<div style='font-family: \"Papyrus\", \"fantasy\"; color: #d93025; font-size: 18px; line-height: 1.4;'>Utilizzare un font come il Papyrus interamente in rosso rende il documento illeggibile e infantile. Questo tipo di formattazione distrae il lettore, stanca la vista e rovina istantaneamente la credibilità di qualsiasi lavoro professionale.</div>",
+                        good: "<div class='doc-p'>Al contrario, è fondamentale utilizzare un carattere pulito e professionale. Il colore rosso deve essere limitato solo a piccole parti di testo per evidenziare avvisi o <span style='color:#d93025; font-weight:bold;'>errori critici</span>, mantenendo il resto del contenuto sobrio ed estremamente leggibile a video.</div>"
+                    }
+                ]
+            },
+            {
+                category: "3️⃣ Mantieni una coerenza visiva",
+                items: [
+                    {
+                        title: "Usa lo stesso font per tutto il documento, variando solo dimensioni e stili.",
+                        explanation: "Usare troppi font diversi dà un'idea di confusione. Scegline uno e resta fedele a quello.",
+                        bad: "<div style='font-family:\"Courier New\", monospace; font-weight:bold; font-size:18pt; margin-bottom:10px;'>Titolo in Courier</div><div style='font-family:\"Times New Roman\", serif; margin-bottom:10px;'>Questo primo paragrafo è scritto in Times New Roman, un carattere con grazie molto classico e tradizionale.</div><div style='font-family:\"Arial\", sans-serif;'>Tuttavia, il resto del paragrafo passa bruscamente ad Arial: mescolare tre diversi font nella stessa sezione crea una forte confusione visiva.</div>",
+                        good: "<div style='font-family:\"Arial\", sans-serif; font-weight:bold; font-size:18pt; margin-bottom:10px;'>Titolo in Arial</div><div style='font-family:\"Arial\", sans-serif;'>In questo esempio, sia l'intestazione che l'intero testo utilizzano lo stesso carattere. La coerenza del font garantisce un aspetto pulito, moderno e armonioso a tutto il documento.</div>"
+                    },
+                    {
+                        title: "Se vuoi usare dei colori, scegline un numero molto ristretto e usa sempre quelli.",
+                        explanation: "Una palette limitata (es. Nero per testo, Blu per titoli) rende il documento professionale e armonioso.",
+                        bad: "<div style='color:#d93025; font-weight:bold; font-size:14pt;'>1. Introduzione in Rosso</div><div class='doc-p'>Iniziamo con un titolo rosso acceso...</div><div style='color:#188038; font-weight:bold; font-size:14pt; margin-top:10px;'>2. Sviluppo in Verde</div><div class='doc-p'>...per poi passare improvvisamente al verde per la seconda sezione...</div><div style='color:#a142f4; font-weight:bold; font-size:14pt; margin-top:10px;'>3. Conclusione in Viola</div><div class='doc-p'>...e finire con il viola. Usare troppi colori rende il documento disordinato e poco professionale.</div>",
+                        good: "<div style='color:#1a73e8; font-weight:bold; font-size:14pt;'>1. Introduzione</div><div class='doc-p'>Utilizziamo un blu tenue e professionale per il primo titolo...</div><div style='color:#1a73e8; font-weight:bold; font-size:14pt; margin-top:10px;'>2. Sviluppo</div><div class='doc-p'>...manteniamo la stessa identica tonalità per il secondo titolo...</div><div style='color:#1a73e8; font-weight:bold; font-size:14pt; margin-top:10px;'>3. Conclusione</div><div class='doc-p'>...e concludiamo con la stessa palette. La coerenza cromatica dona eleganza e ordine al lavoro.</div>"
+                    },
+                    {
+                        title: "Evita combinazioni di colore eccessive o con scarsa leggibilità.",
+                        explanation: "Giallo su bianco o blu scuro su nero sono impossibili da leggere. Garantisci sempre un alto contrasto.",
+                        bad: "<div style='background:yellow; color:white; padding:10px; font-weight:bold;'>TESTO BIANCO SU SFONDO GIALLO</div><div class='doc-p'>Questo accostamento cromatico ha un contrasto quasi nullo, rendendo il testo praticamente invisibile e impossibile da leggere.</div>",
+                        good: "<div style='background:#f9f9f9; color:#1a73e8; padding:10px; font-weight:bold;'>TESTO BLU SU SFONDO CHIARO</div><div class='doc-p'>Scegliendo colori con un alto contrasto e tonalità professionali, garantiamo che il messaggio sia leggibile senza alcuno sforzo da parte dell'utente.</div>"
+                    },
+                    {
+                        title: "Mantieni coerente lo stile delle intestazioni in tutto il documento.",
+                        explanation: "Tutti i titoli di primo livello devono essere uguali, tutti quelli di secondo uguali, e così via.",
+                        bad: "<div style='font-size:20px; font-weight:bold;'>Titolo Capitolo 1</div><div class='doc-p'>Il primo titolo è nero.</div><br><div style='font-size:18px; color:blue; font-style:italic;'>Titolo Capitolo 2</div><div class='doc-p'>Il secondo titolo cambia stile senza motivo, creando confusione.</div>",
+                        good: "<div style='font-size:20px; font-weight:bold;'>Titolo Capitolo 1</div><div class='doc-p'>Tutti i capitoli mantengono lo stesso stile,</div><br><div style='font-size:20px; font-weight:bold;'>Titolo Capitolo 2</div><div class='doc-p'>permettendo al lettore di riconoscere subito la struttura del lavoro.</div>"
+                    },
+                    {
+                        title: "Usa sempre i medesimi stili per elenchi, tabelle, didascalie e grafici.",
+                        explanation: "La ripetizione degli stili aiuta il lettore ad automatizzare il riconoscimento delle diverse parti del documento.",
+                        bad: "<ul style='list-style-type:circle;'><li>Vantaggi Hardware</li><li>Costi ridotti</li></ul><table border='5' style='background:#ffffcc; width:100%; margin:15px 0;'><tr><td bgcolor='red' style='color:white; padding:5px;'><b>MODELLO</b></td><td bgcolor='red' style='color:white; padding:5px;'><b>PREZZO</b></td></tr><tr><td style='padding:5px;'>PC Office</td><td style='padding:5px;'>€ 400</td></tr></table><ul style='list-style-type:square;'><li>Software inclusi</li><li>Garanzia 2 anni</li></ul><table style='border:2px dashed green; width:100%; margin-top:10px;'><tr><td style='color:green;'><b>Componente</b></td><td style='color:green;'><b>Stato</b></td></tr><tr><td>Sistema Op.</td><td>Attivo</td></tr></table>",
+                        good: "<ul style='list-style-type:disc;'><li>Vantaggi Hardware</li><li>Costi ridotti</li></ul><table style='border-collapse:collapse; width:100%; margin:15px 0; border:1px solid #ddd;'><tr style='background:#f1f3f4; border-bottom:2px solid #1a73e8;'><th style='padding:10px; text-align:left;'>MODELLO</th><th style='padding:10px; text-align:left;'>PREZZO</th></tr><tr style='border-bottom:1px solid #eee;'><td style='padding:10px;'>PC Office</td><td style='padding:10px;'>€ 400</td></tr></table><ul style='list-style-type:disc;'><li>Software inclusi</li><li>Garanzia 2 anni</li></ul><table style='border-collapse:collapse; width:100%; margin:10px 0; border:1px solid #ddd;'><tr style='background:#f1f3f4; border-bottom:2px solid #1a73e8;'><th style='padding:10px; text-align:left;'>Componente</th><th style='padding:10px; text-align:left;'>Stato</th></tr><tr><td style='padding:10px;'>Sistema Op.</td><td style='padding:10px;'>Attivo</td></tr></table>"
+                    }
+                ]
+            },
+            {
+                category: "4️⃣ Usa la formattazione in modo corretto",
+                items: [
+                    {
+                        title: "Utilizza il grassetto solo per evidenziare parole e frasi importanti.",
+                        explanation: "Se tutto è in grassetto, nulla spicca. Usalo con parsimonia.",
+                        bad: "<div class='doc-p'><b>In questo pessimo esempio l'intero paragrafo è stato messo in grassetto, annullando completamente l'effetto di enfasi che questo stile dovrebbe garantire.</b></div>",
+                        good: "<div class='doc-p'>Utilizziamo il grassetto solo per le <b>parole chiave</b>, permettendo al lettore di individuare istantaneamente le informazioni più importanti.</div>"
+                    },
+                    {
+                        title: "Utilizza il corsivo solo per citazioni, parole straniere e termini tecnici.",
+                        explanation: "Il corsivo indica termini tecnici (es. <i>Motherboard</i>) o citazioni d'autore.",
+                        bad: "<div class='doc-p'><i>L'architettura dei calcolatori è un argomento complesso che richiede una comprensione dei circuiti integrati.</i></div><div class='doc-p'>Usare il corsivo per intere frasi normali rende la lettura inutilmente faticosa e poco chiara.</div>",
+                        good: "<div class='doc-p'>Il termine tecnico <i>Bus</i> indica il canale di comunicazione principale.</div><div class='doc-p'>Come ha affermato Alan Turing: <i>'Una macchina può essere definita intelligente se riesce a ingannare un uomo'</i>.</div>"
+                    },
+                    {
+                        title: "Utilizza il tutto maiuscolo solo per sigle e acronimi.",
+                        explanation: "SCRIVERE TUTTO IN MAIUSCOLO EQUIVALE A URLARE ed è molto più difficile da leggere.",
+                        bad: "<div class='doc-p'>SCRIVERE INTERE FRASI IN MAIUSCOLO È UN ERRORE PERCHÉ LE LETTERE HANNO TUTTE LA STESSA ALTEZZA, RENDENDO PIÙ DIFFICILE IL RICONOSCIMENTO DELLE PAROLE.</div>",
+                        good: "<div class='doc-p'>Utilizziamo le minuscole per il testo e le maiuscole solo per sigle specifiche come CPU, RAM o GPU.</div>"
+                    },
+                    {
+                        title: "Evita di abusare di tali formattazioni, altrimenti il testo sembrerà confuso.",
+                        explanation: "Troppi stili mischiati (grassetto + corsivo + sottolineato + colore) creano rumore visivo.",
+                        bad: "<div class='doc-p'><b><i><u><span style='color:red;'>ATTENZIONE:</span></u></i></b> Se mescoliamo grassetto, corsivo, sottolineato e colori vivaci nello stesso punto, il risultato sarà solo un grande caos visivo.</div>",
+                        good: "<div class='doc-p'><span style='font-weight:bold;'>ATTENZIONE:</span> Per dare importanza a un avviso, basta usare un singolo stile efficace come il grassetto colorato.</div>"
+                    }
+                ]
+            },
+            {
+                category: "5️⃣ Imposta una spaziatura adeguata",
+                items: [
+                    {
+                        title: "Imposta i paragrafi con allineamento giustificato.",
+                        explanation: "I bordi allineati creano un senso di ordine e professionalità al documento.",
+                        bad: "<div style='text-align:left;'>In questo esempio il testo è allineato a sinistra: come puoi notare chiaramente dal bordo destro del paragrafo, le righe finiscono in punti diversi creando un effetto 'frastagliato' e irregolare. Sebbene questo stile sia accettabile per comunicazioni informali o brevi note, in un documento lungo o professionale questa mancanza di allineamento costante trasmette un senso di disordine visivo che può distrarre il lettore e rendere il lavoro meno curato e meno piacevole da consultare per lunghi periodi di tempo.</div>",
+                        good: "<div style='text-align:justify;'>In questo esempio il testo è impostato con l'allineamento giustificato: come puoi osservare, sia il margine sinistro che quello destro sono perfettamente dritti e paralleli tra loro. Questo tipo di formattazione crea un blocco di testo ordinato, compatto e armonioso, che è lo standard assoluto per ogni tipo di pubblicazione professionale, tesi di laurea, relazione tecnica o libro. La giustificazione del testo trasmette immediatamente un'idea di precisione, cura del dettaglio e alta competenza professionale.</div>"
+                    },
+                    {
+                        title: "Nei paragrafi, usa un’interlinea di 1,15 o 1,5.",
+                        explanation: "L'interlinea (o line spacing) è lo spazio verticale tra le righe di testo. Un valore tra 1,15 e 1,5 è ideale perché permette all'occhio di seguire facilmente il rigo senza saltare righe o perdersi in un testo troppo denso o troppo dispersivo.",
+                        bad: "<div style='line-height:0.8;'>In questo primo blocco l'interlinea è troppo ridotta (0.8): le lettere quasi si toccano e la lettura è molto faticosa.</div><br><div style='line-height:2.5; margin-top:15px;'>In questo secondo blocco, invece, l'interlinea è eccessiva (2.5): le righe sono troppo distanti e il testo appare disperso, slegato e difficile da seguire.</div>",
+                        good: "<div style='line-height:1.5;'>Utilizzando un'interlinea di 1,5, lasciamo il giusto spazio tra le righe. Il testo appare arioso e ordinato, garantendo un'esperienza di lettura fluida e riposante per l'occhio.</div>"
+                    },
+                    {
+                        title: "Mantieni almeno 2 - 2,5 cm di margine su ogni lato.",
+                        explanation: "Il testo non deve toccare i bordi del foglio. I margini bianchi 'incorniciano' il contenuto.",
+                        bad: "<div style='margin:-40px; padding:5px; line-height:1.4;'>In questo esempio i margini sono quasi inesistenti: il testo tocca quasi il bordo del foglio bianco, apparendo 'soffocato' e rendendo difficile la lettura o l'inserimento di eventuali annotazioni manuali.</div>",
+                        good: "<div style='line-height:1.4;'>Utilizzando ampi margini bianchi (almeno 2-2.5 cm) intorno al testo, il contenuto viene correttamente incastonato nella pagina, risultando equilibrato, arioso e molto più professionale.</div>"
+                    },
+                    {
+                        title: "Usa il rientro in prima riga o uno spazio incrementato tra i paragrafi.",
+                        explanation: "Il lettore deve capire immediatamente dove finisce un concetto e ne inizia un altro.",
+                        bad: "<div class='doc-p' style='margin-bottom:0;'>Il primo paragrafo finisce qui e non ha spaziatura dal successivo. I concetti risultano mescolati visivamente, creando un effetto denso e poco leggibile per l'utente che deve scorrere il documento.</div><div class='doc-p' style='margin-bottom:0;'>Il secondo paragrafo inizia subito dopo senza alcuno spazio di separazione né rientro. Questo rende difficile per l'occhio identificare il punto di rottura logica tra le diverse parti del testo.</div><div class='doc-p' style='margin-bottom:0;'>Il terzo paragrafo continua sulla stessa linea visiva, completando il cosiddetto 'muro di testo' che scoraggia la lettura approfondita e trasmette un'idea di scarsa cura nell'impaginazione.</div>",
+                        good: "<div class='doc-p' style='margin-bottom:20px;'>Il primo paragrafo è separato dal successivo da uno spazio bianco generoso. Questa è la tecnica più moderna e pulita per dare ritmo alla lettura nei documenti digitali.</div><div class='doc-p' style='margin-bottom:0;'>Il secondo paragrafo è invece attaccato al terzo per mostrare una struttura più compatta. Tuttavia, per non perdere la distinzione tra i blocchi, useremo un'altra tecnica.</div><div class='doc-p' style='margin-bottom:0; text-indent:30px;'>Il terzo paragrafo inizia con un rientro in prima riga. In questo modo, anche se non c'è spazio verticale tra i due, il lettore capisce immediatamente che stiamo introducendo un nuovo concetto.</div>"
+                    },
+                    {
+                        title: "Lascia un adeguato spazio tra intestazioni, paragrafi, immagini e sezioni.",
+                        explanation: "Il 'vuoto' è un elemento di design. Aiuta a far respirare il documento e lo rende meno minaccioso.",
+                        bad: "<div style='font-weight:bold;'>TITOLO PARAGRAFO</div><div>Il testo è incollato al titolo.</div><div style='font-weight:bold;'>SECONDO TITOLO</div><div style='overflow:hidden; line-height:1.1;'><img src='https://www.focusjunior.it/content/uploads/2017/04/elefante-africano-1.jpg' style='width:200px; height:140px; float:right; border:1px solid #999; margin:0;'>In questo esempio tutto è ammassato: l'immagine è più grande per evidenziare il problema e il testo tocca letteralmente il bordo della foto senza alcuno spazio di separazione, rendendo la lettura difficile e l'aspetto grafico decisamente poco curato e soffocante.</div>",
+                        good: "<div style='font-weight:bold; margin-bottom:10px;'>TITOLO PARAGRAFO</div><div style='text-align:justify; margin-bottom:20px;'>Lasciando lo spazio corretto tra gli elementi, il documento trasmette ordine e cura.</div><div style='font-weight:bold; margin-bottom:10px;'>SECONDO TITOLO</div><div style='overflow:hidden;'><img src='https://www.focusjunior.it/content/uploads/2017/04/elefante-africano-1.jpg' style='width:200px; height:140px; float:right; border:1px solid #1a73e8; margin-left:25px; margin-bottom:10px; border-radius:8px;'><div style='text-align:justify;'>In questo esempio positivo l'immagine dell'elefante è ben visibile ma non invade lo spazio del testo. Grazie a un margine adeguato (25px) e all'allineamento giustificato, il contenuto respira correttamente, creando un layout armonioso e professionale che invita alla consultazione.</div></div>"
+                    },
+                    {
+                        title: "Non usare a capo e spazi bianchi per migliorare la spaziatura, sfrutta gli opportuni strumenti.",
+                        explanation: "Se premi 'Invio' molte volte, basterà una modifica al testo per sballare tutta l'impaginazione successiva.",
+                        bad: `<div class='doc-p' style='color:#555; overflow-wrap: anywhere; word-break: break-word; font-size: 16px;'>In·questo·esempio·il·nuovo·capitolo·è·stato·spinto·in·basso·premendo·il·tasto·Invio·molte·volte.<span style='color:#4285f4; opacity:0.6;'>¶</span><br>
+                                <span style='color:#4285f4; opacity:0.6;'>¶</span><br>
+                                <span style='color:#4285f4; opacity:0.6;'>¶</span><br>
+                                <span style='color:#4285f4; opacity:0.6;'>¶</span><br>
+                                <span style='color:#4285f4; opacity:0.6;'>¶</span><br>
+                                <b style='font-size:18pt; font-family:sans-serif;'>NUOVO CAPITOLO</b><span style='color:#4285f4; opacity:0.6;'>¶</span><br>
+                                <span style='color:#4285f4; opacity:0.6;'>¶</span><br>
+                                In·questo·caso·abbiamo·usato·un·"Invio"·vuoto·per·creare·spazio·dopo·il·titolo.<span style='color:#4285f4; opacity:0.6;'>¶</span></div>`,
+                        good: `<div class='doc-p' style='color:#555; overflow-wrap: anywhere; word-break: break-word; font-size: 16px;'>In·questo·esempio·utilizziamo·l'interruzione·di·pagina·corretta.<span style='color:#4285f4; opacity:0.6;'>¶</span><br>
+                                <div style='border-top: 1px dashed #4285f4; margin: 20px 0 90px 0; position: relative;'>
+                                    <span style='position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: white; padding: 0 10px; color: #4285f4; font-size: 10px;'>Interruzione di pagina</span>
+                                </div>
+                                <b style='font-size:18pt; font-family:sans-serif;'>NUOVO CAPITOLO</b><span style='color:#4285f4; opacity:0.6;'>¶</span>
+                                <div style='margin-top:25px;'>In·questo·secondo·caso·lo·spazio·è·generato·automaticamente·dalla·spaziatura·del·paragrafo,·senza·caratteri·invisibili·inutili.·Nota·come·non·vi·siano·simboli·¶·vuoti·tra·il·titolo·e·l'inizio·del·testo.<span style='color:#4285f4; opacity:0.6;'>¶</span></div></div>`
+                    }
+                ]
+            },
+            {
+                category: "6️⃣ Inserisci immagini e grafici in modo pertinente",
+                items: [
+                    {
+                        title: "Usa solo elementi grafici (immagini e grafici) di alta qualità.",
+                        explanation: "Un'immagine sgranata o 'pixelata' rovina immediatamente l'immagine di un documento professionale.",
+                        bad: `<div style='display:flex; flex-direction:column; align-items:center; gap:15px; margin-bottom:15px;'>
+                                <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzCxSXHS45zEgwfX-3Q1-i8z5i0oMP6NmooQ&s' style='width:200px; height:180px; object-fit:cover; border-radius:8px; border:1px solid #ddd;'>
+                                <img src='https://c8.alamy.com/comp/3B0J1KK/shrek-3B0J1KK.jpg' style='width:200px; height:180px; object-fit:cover; border-radius:8px; border:1px solid #ddd;'>
+                                <img src='https://p7.hiclipart.com/preview/553/165/250/shrek-the-musical-princess-fiona-shrek-2-youtube-shrek-thumbnail.jpg' style='width:200px; height:180px; object-fit:cover; border-radius:8px; border:1px solid #ddd;'>
+                               </div><div class='doc-p' style='font-size:14px; text-align:center;'>In questo esempio le immagini sono di pessima qualità e sfocate, rovinando l'impatto visivo del documento.</div>`,
+                        good: `<div style='display:flex; flex-direction:column; align-items:center; gap:15px; margin-bottom:15px;'>
+                                <img src='https://upload.wikimedia.org/wikipedia/it/thumb/9/98/Shrek.png/1280px-Shrek.png' style='width:200px; height:180px; object-fit:cover; border-radius:8px; border:1px solid #ddd;'>
+                                <img src='https://wallpapers.com/images/hd/shrek-4k-candid-and-surprised-dlflew3w2nn9ijjj.jpg' style='width:200px; height:180px; object-fit:cover; border-radius:8px; border:1px solid #ddd;'>
+                                <img src='https://www.pngall.com/wp-content/uploads/2/Shrek-PNG-Transparent-HD-Photo.png' style='width:200px; height:180px; object-fit:cover; border-radius:8px; border:1px solid #ddd;'>
+                               </div><div class='doc-p' style='font-size:14px; text-align:center;'>Utilizzando immagini nitide, ben centrate e ad alta risoluzione, il documento comunica professionalità e cura del dettaglio.</div>`
+                    },
+                    {
+                        title: "Posiziona gli elementi grafici in modo coerente rispetto al testo.",
+                        explanation: "L'immagine deve trovarsi vicino al paragrafo che la descrive, non tre pagine dopo.",
+                        bad: "<div class='doc-p'>Analizzeremo ora l'andamento delle vendite mostrato nel grafico qui sotto...</div><br><br><br><br><div class='doc-p'>[In questo esempio, il lettore deve scorrere tre paragrafi vuoti prima di trovare finalmente l'immagine promessa].</div><div style='width:200px; height:20px; background:#ddd;'></div>",
+                        good: "<div class='doc-p'>Come mostrato nel grafico sottostante, le vendite sono raddoppiate:</div><div style='width:200px; height:80px; background:#e8f0fe; border:1px solid #1a73e8; margin:10px 0; display:flex; align-items:center; justify-content:center; color:#1a73e8; font-family:sans-serif;'>GRAFICO VENDITE</div>"
+                    },
+                    {
+                        title: "Mantieni una distanza equilibrata tra testo ed elementi grafici.",
+                        explanation: "Evita che il testo 'urti' against l'immagine. Usa i margini interni (padding/spacing) delle figure.",
+                        bad: "<div style='float:left; width:50px; height:50px; background:#ccc;'></div>In questo esempio il testo è letteralmente incollato al bordo grigio dell'immagine, rendendo la lettura estremamente scomoda e poco professionale.",
+                        good: "<div style='float:left; width:50px; height:50px; background:#e8f0fe; margin-right:20px; border:1px solid #1a73e8;'></div>Utilizzando un margine destro di 20px, separiamo correttamente il testo dall'immagine, permettendo all'occhio di scorrere lungo i bordi senza intoppi.",
+                    },
+                    {
+                        title: "Aggiungi didascalie per spiegare gli elementi grafici.",
+                        explanation: "Una didascalia (es. <i>Fig 1. Schema del Bus</i>) rende il documento accademico e chiaro.",
+                        bad: "<div style='width:100px; height:60px; background:#ddd; margin:10px 0;'></div><div class='doc-p'>In questo esempio il grafico manca di una didascalia, lasciando al lettore il compito di indovinare cosa rappresenti.</div>",
+                        good: "<div style='width:100px; height:60px; background:#e8f0fe; margin:10px 0;'></div><div style='font-size:12px; color:gray; margin-bottom:10px;'><i>Fig. 2 - Rendimento dei processori ARM nel 2024.</i></div><div class='doc-p'>Una breve riga descrittiva sotto l'immagine chiarisce subito il contenuto e la fonte del grafico.</div>"
+                    },
+                    {
+                        title: "Non sovraccaricare il documento con troppi elementi grafici.",
+                        explanation: "Le immagini devono supportare il testo, non sostituirlo. Se ce ne sono troppe, il lettore perde il filo.",
+                        bad: "<div class='doc-p'>In questo esempio le immagini sono troppe e distraenti:</div>[Img 1] [Img 2] [Img 3] [Img 4]<div class='doc-p'>Il testo viene interrotto continuamente, rendendo impossibile seguire un filo logico coerente.</div>",
+                        good: "<div class='doc-p'>Utilizziamo una singola immagine ben scelta per riassumere visivamente il concetto espresso nel paragrafo sovrastante.</div><div style='width:100px; height:50px; background:#e8f0fe; border:1px solid #1a73e8;'></div>"
+                    },
+                    {
+                        title: "Ridimensiona gli elementi grafici in modo che si adattino al documento.",
+                        explanation: "Non inserire immagini gigantesche che occupano tutto il foglio se non è strettamente necessario.",
+                        bad: "<div style='width:800px; height:100px; background:#eee; overflow:hidden;'>IMMAGINE TROPPO LARGA</div><div class='doc-p'>In questo caso l'immagine esce dai bordi del foglio, costringendo il lettore a scrollare orizzontalmente o stampando solo una parte della figura.</div>",
+                        good: "<div style='width:100%; max-width:400px; height:100px; background:#e8f0fe; border:1px solid #1a73e8; display:flex; align-items:center; justify-content:center;'>DIMENSIONE CORRETTA</div><div class='doc-p'>Scalando l'immagine in base ai margini del documento, manteniamo l'armonia della pagina e la leggibilità totale.</div>"
+                    },
+                    {
+                        title: "Assicurati che gli elementi grafici siano coerenti con lo stile generale.",
+                        explanation: "Se il documento è formale, evita clip-art infantili o disegni a mano libera disordinati.",
+                        bad: "<div style='font-family:serif; color:#333; height:100px;'>RELAZIONE SCIENTIFICA<br><span style='font-size:40px;'>🤡</span><br>L'uso di emoji colorate e informali rompe il tono professionale richiesto da una relazione accademica.</div>",
+                        good: "<div style='font-family:serif; color:#333; height:100px;'>RELAZIONE SCIENTIFICA<br><div style='width:60px; height:40px; border:1px solid #333; display:flex; align-items:center; justify-content:center; font-size:10px;'>FIG. 1</div><br>Uno schema pulito ed essenziale si integra perfettamente con il linguaggio formale del testo.</div>"
+                    }
+                ]
+            },
+            {
+                category: "7️⃣ Usa forme differenti per evitare il muro di testo",
+                items: [
+                    {
+                        title: "Mantieni le tabelle semplici, con bordi leggeri e formattazione coerente.",
+                        explanation: "Le tabelle servono a confrontare dati. Più sono pulite, più il confronto è immediato.",
+                        bad: "<table border='10' style='background:black; color:yellow;'><tr><td>DATI</td></tr></table>",
+                        good: "<table style='border-collapse:collapse; width:100%; text-align:left;'><tr style='background:#f1f3f4; font-weight:bold; border-bottom:2px solid #ddd;'><td style='padding:10px;'>CATEGORIA</td><td style='padding:10px;'>VALORE</td></tr><tr><td style='padding:10px; border-bottom:1px solid #eee;'>Prestazioni</td><td style='padding:10px; border-bottom:1px solid #eee;'>Ottime</td></tr></table>"
+                    },
+                    {
+                        title: "Scegli elenchi per rappresentare schematicamente le idee.",
+                        explanation: "Elenchi puntati per idee sparse, numerati se c'è una priorità o un ordine temporale.",
+                        bad: "<div class='doc-p'>In questo esempio elenchiamo i vantaggi del software come se fossero una sequenza ordinata (1, 2, 3), anche se non c'è un ordine preciso: 1. Velocità, 2. Sicurezza, 3. Gratuito.</div>",
+                        good: "<ul><li>Velocità</li><li>Sicurezza</li><li>Gratuità</li></ul><div class='doc-p'>L'elenco puntato è la scelta corretta per presentare un insieme di caratteristiche senza una gerarchia temporale.</div>"
+                    },
+                    {
+                        title: "Utilizza formule e simboli per concetti matematici.",
+                        explanation: "Usa gli editor di equazioni per rendere le formule leggibili (es. x² invece di x^2).",
+                        bad: "<div class='doc-p'>L'area del cerchio si calcola facendo pi-greco moltiplicato per il raggio al quadrato, scritto male come: Area = 3.14 * r^2</div>",
+                        good: "<div class='doc-p' style='font-family:serif; font-style:italic; font-size:20px; text-align:center;'>A = π · r²</div><div class='doc-p'>Utilizzando i simboli corretti (π) e gli apici (²), la formula diventa professionale e inequivocabile.</div>"
+                    },
+                    {
+                        title: "Utilizza altri strumenti come Smart Chip, disegni, caselle di testo, codici.",
+                        explanation: "Sfrutta le potenzialità digitali dei moderni editor (es. blocchi di codice per la programmazione).",
+                        bad: "<div style='font-family:serif;'>for i in range(10): print(i)</div><div class='doc-p'>In questo caso il codice è scritto con un font normale: è difficile distinguerlo dal resto del testo.</div>",
+                        good: "<div style='background:#272822; color:#f8f8f2; padding:15px; border-radius:8px; font-family:monospace;'>for i in range(10):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)</div><div class='doc-p'>Utilizzando un blocco scuro e un font monospazio, il codice spicca chiaramente come elemento tecnico.</div>"
+                    }
+                ]
+            },
+            {
+                category: "8️⃣ Controlla grammatica e stile del linguaggio",
+                items: [
+                    {
+                        title: "Usa il controllo ortografico per evitare errori.",
+                        explanation: "Un documento con errori è un documento che perde autorità agli occhi di chi legge.",
+                        bad: "<div class='doc-p'><span style='text-decoration: underline wavy #1a73e8; text-decoration-thickness: 2px;'>in</span> questo testo ci sono diversi <span style='text-decoration: underline wavy #d93025; text-decoration-thickness: 2px;'>erori</span> di ortografia <span style='text-decoration: underline wavy #d93025; text-decoration-thickness: 2px;'>perche</span> non è <span style='text-decoration: underline wavy #d93025; text-decoration-thickness: 2px;'>sato</span> usato <span style='text-decoration: underline wavy #1a73e8; text-decoration-thickness: 2px;'>la correttore</span> automatico. (Le sottolineature evidenziano errori gravi <span style='text-decoration: underline wavy #d93025; text-decoration-thickness: 2px;'>ò</span> imprecisioni grammaticali).</div>",
+                        good: "<div class='doc-p'>In questo testo non ci sono errori di ortografia perché è stato usato correttamente il correttore automatico.</div>"
+                    },
+                    {
+                        title: "Scegli il tipo di linguaggio da usare in base allo scopo.",
+                        explanation: "Semplice e diretto per gli studenti, tecnico e preciso per i colleghi o contesti formali.",
+                        bad: "<div class='doc-p'>Dobbiamo computare l'algoritmo ricorsivamente per iterare il dataset. (Troppo difficile per un principiante)</div>",
+                        good: "<div class='doc-p'>Dobbiamo ripetere i calcoli finché non abbiamo finito tutti i dati a disposizione. (Semplice e chiaro)</div>"
+                    },
+                    {
+                        title: "Considera la leggibilità anche su altri dispositivi (smartphone/tablet).",
+                        explanation: "Molti leggeranno il tuo PDF sul telefono: usa font chiari e tabelle non troppo larghe.",
+                        bad: "<div style='width:1200px; background:#eee;'>TABELLA LARGHISSIMA CHE RICHIEDE SCROLL LATERALE</div>",
+                        good: "<div style='width:100%; max-width:500px; background:#e8f0fe;'>TABELLA RESPONSIVE CHE SI ADATTA ALLO SCHERMO</div>"
+                    }
+                ]
+            },
+            {
+                category: "9️⃣ Usa intestazione e piè di pagina se utili",
+                items: [
+                    {
+                        title: "Usa l’intestazione per inserire il titolo, l'autore o il nome della sezione.",
+                        explanation: "L'intestazione si ripete in ogni pagina, ricordando al lettore dove si trova.",
+                        bad: "<div class='doc-p'>In questo esempio manca l'intestazione: arrivati a pagina 10, il lettore potrebbe aver dimenticato il titolo del documento che sta leggendo.</div>",
+                        good: "<div style='display:flex; justify-content:space-between; border-bottom:1px solid #ccc; font-size:12px; color:gray; margin-bottom:20px; padding-bottom:5px;'><span>Architettura di Von Neumann - La CPU</span><span>Patrick Militello</span></div><div class='doc-p'>L'intestazione fissa garantisce che il contesto del documento e l'autore siano sempre visibili in ogni foglio.</div>"
+                    },
+                    {
+                        title: "Usa il piè di pagina per numerare le pagine.",
+                        explanation: "Senza numeri di pagina, è impossibile citare parti del documento o riordinare i fogli caduti.",
+                        bad: "<div class='doc-p'>In questo foglio manca il numero di pagina: se i documenti venissero stampati e mescolati, sarebbe impossibile ricostruire l'ordine.</div>",
+                        good: "<div class='doc-p'>Grazie alla numerazione automatica nel piè di pagina, il documento è sempre facile da consultare e ordinare.</div><div style='text-align:center; margin-top:30px; border-top:1px solid #eee; padding-top:10px; font-size:12px; color:#888;'>- Pagina 5 di 12 -</div>"
+                    },
+                    {
+                        title: "Utilizza uno stile meno evidente per piè di pagina (es. testo grigio).",
+                        explanation: "Queste sono informazioni di servizio: non devono distrarre dalla lettura del testo principale.",
+                        bad: "<div style='font-weight:900; font-size:18px; color:black;'>PAGINA 1 DI 10</div><div class='doc-p'>In questo caso la numerazione è troppo grande e vistosa, attirando l'attenzione lontano dal contenuto principale.</div>",
+                        good: "<div style='font-size:11px; color:#888;'>Pagina 1 di 10</div><div class='doc-p'>Utilizzando un font piccolo e grigio, le informazioni di servizio rimangono disponibili senza disturbare la lettura.</div>"
+                    }
+                ]
+            },
+            {
+                category: "🔟 Collega il tuo documento con l’esterno",
+                items: [
+                    {
+                        title: "Inserisci riferimenti a pagine Web e video tramite link.",
+                        explanation: "Un documento digitale è 'vivo': può rimandare a video YouTube o siti per espandere i concetti.",
+                        bad: "<div class='doc-p'>Gli elefanti sono mammiferi proboscidati. Per saperne di più, chiudi questo documento, apri il browser e cerca 'Elefante' su Google o Wikipedia.</div>",
+                        good: "<div class='doc-p'>Gli elefanti sono mammiferi proboscidati. Per approfondire le loro caratteristiche biologiche, consulta la pagina <a href='https://it.wikipedia.org/wiki/Elephantidae' target='_blank' class='doc-link'>Wikipedia: Elephantidae</a>.</div>"
+                    },
+                    {
+                        title: "Assicurati che i link siano descrittivi.",
+                        explanation: "Invece di scrivere 'clicca qui', scrivi cosa si troverà cliccando.",
+                        bad: "<div class='doc-p' style='margin-bottom:15px;'>Per visualizzare la classificazione scientifica degli elefanti <a href='https://it.wikipedia.org/wiki/Elephantidae' target='_blank'>clicca qui</a>. (L'uso di un testo generico non fa capire dove si sta andando)</div><div class='doc-p'>Oppure scrivendo l'intero indirizzo: <a href='https://it.wikipedia.org/wiki/Elephantidae' target='_blank'>https://it.wikipedia.org/wiki/Elephantidae</a> (Un URL lungo e complesso interrompe bruscamente il flusso della lettura)</div>",
+                        good: "<div class='doc-p'>Consulta la <a href='https://it.wikipedia.org/wiki/Elephantidae' target='_blank'>classificazione scientifica degli elefanti</a> per l'elenco completo delle specie.</div>"
+                    },
+                    {
+                        title: "Scegli per i link uno stile che faccia comprendere che sono cliccabili.",
+                        explanation: "Usa il blu classico o la sottolineatura: il lettore deve capire subito che si tratta di un'area interattiva.",
+                        bad: "<div class='doc-p'>Approfondisci l'argomento su <a href='https://it.wikipedia.org/wiki/Elephantidae' target='_blank' style='color:inherit; text-decoration:none;'>Wikipedia</a>.</div><div class='doc-p' style='font-size:14px; color:#666;'>(Qui il link c'è, ma è indistinguibile dal resto del testo)</div>",
+                        good: "<div class='doc-p'>Approfondisci l'argomento su <a href='https://it.wikipedia.org/wiki/Elephantidae' target='_blank' class='doc-link'>Wikipedia</a>.</div><div class='doc-p' style='font-size:14px; color:#666;'>(Qui il link è evidente grazie al colore e alla sottolineatura)</div>"
+                    }
+                ]
+            }
+        ];
+
+        const container = document.getElementById('checklist-container');
+
+        data.forEach((cat, catIdx) => {
+            const section = document.createElement('div');
+            section.className = 'category-section';
+
+            section.innerHTML = `
+                <div class="category-header">
+                    <span class="category-title">${cat.category}</span>
+                </div>
+                <div class="checklist-grid" id="grid-${catIdx}"></div>
+            `;
+            container.appendChild(section);
+
+            const grid = section.querySelector(`#grid-${catIdx}`);
+
+            cat.items.forEach((item, itemIdx) => {
+                const id = `item-${catIdx}-${itemIdx}`;
+                const isCompleted = localStorage.getItem(id) === 'true';
+
+                const itemEl = document.createElement('div');
+                itemEl.className = `checklist-item ${isCompleted ? 'completed' : ''}`;
+                itemEl.id = id;
+
+                itemEl.innerHTML = `
+                    <div class="checklist-checkbox" onclick="toggleComplete(event, '${id}')">
+                        ${isCompleted ? '<i data-lucide="check"></i>' : '<i data-lucide="check" style="display:none"></i>'}
+                    </div>
+                    <div class="checklist-title" onclick="toggleComplete(event, '${id}')">${item.title}</div>
+                    <div class="info-btn" onclick="openModal(${catIdx}, ${itemIdx})">
+                        <i data-lucide="info"></i>
+                    </div>
+                `;
+                grid.appendChild(itemEl);
+            });
+        });
+
+        // Initialize Icons
+        lucide.createIcons();
+
+        function openModal(catIdx, itemIdx) {
+            const item = data[catIdx].items[itemIdx];
+            document.getElementById('modal-title').innerText = item.title;
+            document.getElementById('modal-body').innerHTML = `
+                <div class="explanation">
+                    💡 <b>Perché è importante?</b><br>
+                    ${item.explanation}
+                </div>
+                <div class="examples-grid">
+                    <div class="example-box">
+                        <div class="example-label label-neg"><i data-lucide="circle-x"></i> Esempio ERRORE</div>
+                        <div class="document-box">${item.bad}</div>
+                    </div>
+                    <div class="example-box">
+                        <div class="example-label label-pos"><i data-lucide="circle-check"></i> Esempio OTTIMO</div>
+                        <div class="document-box">${item.good}</div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('modal-overlay').classList.add('active');
+            lucide.createIcons();
+            document.body.style.overflow = 'hidden'; // Prevent scroll
+        }
+
+        function closeModal() {
+            document.getElementById('modal-overlay').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function toggleComplete(event, id) {
+            event.stopPropagation();
+            const el = document.getElementById(id);
+            const isCompleted = el.classList.toggle('completed');
+
+            const checkbox = el.querySelector('.checklist-checkbox');
+            if (isCompleted) {
+                checkbox.innerHTML = '<i data-lucide="check"></i>';
+                localStorage.setItem(id, 'true');
+            } else {
+                checkbox.innerHTML = '<i data-lucide="check" style="display:none"></i>';
+                localStorage.removeItem(id);
+            }
+            lucide.createIcons();
+        }
+
+        function resetChecklist() {
+            if (confirm("Sei sicuro di voler resettare tutta la checklist? Perderai tutti i progressi salvati.")) {
+                localStorage.clear();
+                location.reload();
+            }
+        }
+    </script>
+</body>
+
+</html>
