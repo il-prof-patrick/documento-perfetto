@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checklist Docente: Il Documento Perfetto</title>
+    <title>Checklist per un Documento Perfetto</title>
     <!-- Google Fonts -->
     <link
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
@@ -392,7 +392,7 @@
     <header>
         <div class="header-content">
             <div class="header-text">
-                <h1>Checklist Docente</h1>
+                <h1>Checklist - Documenti</h1>
                 <p class="subtitle">Guida rapida per la creazione del documento perfetto</p>
             </div>
             <button id="reset-btn" onclick="resetChecklist()">
@@ -582,10 +582,10 @@
                         good: "<div class='doc-p' style='margin-bottom:20px;'>Il primo paragrafo è separato dal successivo da uno spazio bianco generoso. Questa è la tecnica più moderna e pulita per dare ritmo alla lettura nei documenti digitali.</div><div class='doc-p' style='margin-bottom:0;'>Il secondo paragrafo è invece attaccato al terzo per mostrare una struttura più compatta. Tuttavia, per non perdere la distinzione tra i blocchi, useremo un'altra tecnica.</div><div class='doc-p' style='margin-bottom:0; text-indent:30px;'>Il terzo paragrafo inizia con un rientro in prima riga. In questo modo, anche se non c'è spazio verticale tra i due, il lettore capisce immediatamente che stiamo introducendo un nuovo concetto.</div>"
                     },
                     {
-                        title: "Lascia un adeguato spazio tra intestazioni, paragrafi, immagini e sezioni.",
+                        title: "Lascia un adeguato spazio tra intestazioni, paragrafi e sezioni.",
                         explanation: "Il 'vuoto' è un elemento di design. Aiuta a far respirare il documento e lo rende meno minaccioso.",
-                        bad: "<div style='font-weight:bold;'>TITOLO PARAGRAFO</div><div>Il testo è incollato al titolo.</div><div style='font-weight:bold;'>SECONDO TITOLO</div><div style='overflow:hidden; line-height:1.1;'><img src='https://www.focusjunior.it/content/uploads/2017/04/elefante-africano-1.jpg' style='width:200px; height:140px; float:right; border:1px solid #999; margin:0;'>In questo esempio tutto è ammassato: l'immagine è più grande per evidenziare il problema e il testo tocca letteralmente il bordo della foto senza alcuno spazio di separazione, rendendo la lettura difficile e l'aspetto grafico decisamente poco curato e soffocante.</div>",
-                        good: "<div style='font-weight:bold; margin-bottom:10px;'>TITOLO PARAGRAFO</div><div style='text-align:justify; margin-bottom:20px;'>Lasciando lo spazio corretto tra gli elementi, il documento trasmette ordine e cura.</div><div style='font-weight:bold; margin-bottom:10px;'>SECONDO TITOLO</div><div style='overflow:hidden;'><img src='https://www.focusjunior.it/content/uploads/2017/04/elefante-africano-1.jpg' style='width:200px; height:140px; float:right; border:1px solid #1a73e8; margin-left:25px; margin-bottom:10px; border-radius:8px;'><div style='text-align:justify;'>In questo esempio positivo l'immagine dell'elefante è ben visibile ma non invade lo spazio del testo. Grazie a un margine adeguato (25px) e all'allineamento giustificato, il contenuto respira correttamente, creando un layout armonioso e professionale che invita alla consultazione.</div></div>"
+                        bad: "<div style='font-weight:bold;'>TITOLO PARAGRAFO</div><div>Il testo è incollato al titolo.</div><div style='font-weight:bold;'>SECONDO TITOLO</div><div class='doc-p'>Anche qui il testo inizia subito dopo il titolo senza respiro. Tutto appare compresso e poco leggibile.</div>",
+                        good: "<div style='font-weight:bold; margin-bottom:5px;'>TITOLO PARAGRAFO</div><div style='text-align:justify; margin-bottom:35px;'>Lasciando lo spazio corretto tra gli elementi, il documento trasmette ordine e cura.</div><div style='font-weight:bold; margin-bottom:5px;'>SECONDO TITOLO</div><div class='doc-p'>Lo spazio bianco guida l'occhio e separa logicamente le diverse parti del contenuto.</div>"
                     },
                     {
                         title: "Non usare a capo e spazi bianchi per migliorare la spaziatura, sfrutta gli opportuni strumenti.",
@@ -625,40 +625,40 @@
                                </div><div class='doc-p' style='font-size:14px; text-align:center;'>Utilizzando immagini nitide, ben centrate e ad alta risoluzione, il documento comunica professionalità e cura del dettaglio.</div>`
                     },
                     {
-                        title: "Posiziona gli elementi grafici in modo coerente rispetto al testo.",
-                        explanation: "L'immagine deve trovarsi vicino al paragrafo che la descrive, non tre pagine dopo.",
-                        bad: "<div class='doc-p'>Analizzeremo ora l'andamento delle vendite mostrato nel grafico qui sotto...</div><br><br><br><br><div class='doc-p'>[In questo esempio, il lettore deve scorrere tre paragrafi vuoti prima di trovare finalmente l'immagine promessa].</div><div style='width:200px; height:20px; background:#ddd;'></div>",
-                        good: "<div class='doc-p'>Come mostrato nel grafico sottostante, le vendite sono raddoppiate:</div><div style='width:200px; height:80px; background:#e8f0fe; border:1px solid #1a73e8; margin:10px 0; display:flex; align-items:center; justify-content:center; color:#1a73e8; font-family:sans-serif;'>GRAFICO VENDITE</div>"
+                        title: "Posiziona gli elementi grafici rispettando i margini del testo.",
+                        explanation: "Le immagini devono essere allineate con il testo. Se il paragrafo ha una certa larghezza, l'immagine non deve essere più larga e non deve uscire dai margini laterali.",
+                        bad: "<div style='padding:0 40px; overflow:hidden;'><img src='https://www.focusjunior.it/content/uploads/2017/04/elefante-africano-1.jpg' style='float:right; width:200px; margin-right:-40px; margin-left:15px; margin-bottom:10px; box-shadow:0 0 5px rgba(0,0,0,0.2);'><div class='doc-p' style='text-align:justify;'>Questo paragrafo definisce i limiti laterali del documento. Immagina due linee verticali invisibili che racchiudono tutto il testo. L'immagine che vedi qui a destra rompe questo schema visivo: è stata posizionata senza rispettare il margine destro, finendo per 'sbordare' fuori dalla colonna di testo. Questo errore crea un effetto disordinato e poco professionale, rompendo la griglia di impaginazione che guida l'occhio del lettore.</div></div>",
+                        good: "<div style='padding:0 40px; overflow:hidden;'><img src='https://www.focusjunior.it/content/uploads/2017/04/elefante-africano-1.jpg' style='float:right; width:200px; margin-left:15px; margin-bottom:10px; border-radius:4px; border:1px solid #1a73e8;'><div class='doc-p' style='text-align:justify;'>Questo paragrafo definisce i limiti laterali del documento. Immagina due linee verticali invisibili che racchiudono tutto il testo. In questo esempio corretto, l'immagine è perfettamente allineata al bordo destro del testo. Questa precisione mantiene l'ordine visivo della pagina, permettendo all'occhio di scorrere lungo il margine senza interruzioni o elementi fuori posto, garantendo un aspetto curato.</div></div>"
                     },
                     {
                         title: "Mantieni una distanza equilibrata tra testo ed elementi grafici.",
-                        explanation: "Evita che il testo 'urti' against l'immagine. Usa i margini interni (padding/spacing) delle figure.",
-                        bad: "<div style='float:left; width:50px; height:50px; background:#ccc;'></div>In questo esempio il testo è letteralmente incollato al bordo grigio dell'immagine, rendendo la lettura estremamente scomoda e poco professionale.",
-                        good: "<div style='float:left; width:50px; height:50px; background:#e8f0fe; margin-right:20px; border:1px solid #1a73e8;'></div>Utilizzando un margine destro di 20px, separiamo correttamente il testo dall'immagine, permettendo all'occhio di scorrere lungo i bordi senza intoppi.",
+                        explanation: "Evita che il testo 'urti' contro l'immagine. Usa i margini interni (padding/spacing) delle figure.",
+                        bad: "<div style='overflow:hidden;'><img src='https://www.focusjunior.it/content/uploads/2017/04/elefante-africano-1.jpg' style='width:200px; float:right; border:1px solid #999; margin:0;'><div style='text-align:justify;'>In questo esempio l'immagine è posizionata a destra ma manca completamente di margini. Puoi notare come il testo 'urti' contro il bordo sinistro della foto e, continuando a scrivere, finisca per attaccarsi anche al bordo inferiore quando scorre sotto. Questa mancanza di spazio bianco rende la lettura faticosa, l'aspetto disordinato e dà l'impressione che il documento sia stato impaginato di fretta senza cura per i dettagli estetici.</div></div>",
+                        good: "<div style='overflow:hidden;'><img src='https://www.focusjunior.it/content/uploads/2017/04/elefante-africano-1.jpg' style='width:200px; float:right; border:1px solid #1a73e8; margin-left:20px; margin-bottom:10px; border-radius:8px;'><div style='text-align:justify;'>In questo esempio corretto, abbiamo applicato un margine sia a sinistra che in basso all'immagine. Il testo scorre armoniosamente attorno alla figura mantenendo una distanza di rispetto che facilita la lettura. Quando il paragrafo prosegue sotto l'immagine, lo spazio verticale garantisce che non ci sia collisione visiva, creando un layout professionale, pulito e piacevole da consultare.</div></div>"
                     },
                     {
                         title: "Aggiungi didascalie per spiegare gli elementi grafici.",
-                        explanation: "Una didascalia (es. <i>Fig 1. Schema del Bus</i>) rende il documento accademico e chiaro.",
-                        bad: "<div style='width:100px; height:60px; background:#ddd; margin:10px 0;'></div><div class='doc-p'>In questo esempio il grafico manca di una didascalia, lasciando al lettore il compito di indovinare cosa rappresenti.</div>",
-                        good: "<div style='width:100px; height:60px; background:#e8f0fe; margin:10px 0;'></div><div style='font-size:12px; color:gray; margin-bottom:10px;'><i>Fig. 2 - Rendimento dei processori ARM nel 2024.</i></div><div class='doc-p'>Una breve riga descrittiva sotto l'immagine chiarisce subito il contenuto e la fonte del grafico.</div>"
+                        explanation: "Una didascalia fornisce contesto all'immagine. Deve usare uno stile diverso e meno evidente del corpo del testo (es. font più piccolo, corsivo, grigio) e non deve mai sbordare oltre la larghezza dell'immagine stessa.",
+                        bad: "<div style='text-align:center;'><img src='https://www.focusjunior.it/content/uploads/2017/04/elefante-africano-1.jpg' style='width:200px; border:1px solid #ccc;'></div><div class='doc-p'>In questo esempio manca qualsiasi didascalia, lasciando al lettore il compito di interpretare il contesto dell'immagine.</div>",
+                        good: "<figure style='margin:0 auto; width:200px; display:block; text-align:center;'><img src='https://www.focusjunior.it/content/uploads/2017/04/elefante-africano-1.jpg' style='width:100%; border-radius:4px; border:1px solid #1a73e8;'><figcaption style='font-size:12px; color:#666; margin-top:5px; line-height:1.3;'><i>Fig. 1 - Un esemplare di elefante africano nella savana.</i></figcaption></figure><div class='doc-p'>La didascalia corretta è discreta e perfettamente allineata alla larghezza della foto.</div>"
                     },
                     {
                         title: "Non sovraccaricare il documento con troppi elementi grafici.",
-                        explanation: "Le immagini devono supportare il testo, non sostituirlo. Se ce ne sono troppe, il lettore perde il filo.",
-                        bad: "<div class='doc-p'>In questo esempio le immagini sono troppe e distraenti:</div>[Img 1] [Img 2] [Img 3] [Img 4]<div class='doc-p'>Il testo viene interrotto continuamente, rendendo impossibile seguire un filo logico coerente.</div>",
-                        good: "<div class='doc-p'>Utilizziamo una singola immagine ben scelta per riassumere visivamente il concetto espresso nel paragrafo sovrastante.</div><div style='width:100px; height:50px; background:#e8f0fe; border:1px solid #1a73e8;'></div>"
+                        explanation: "Le immagini devono supportare il testo, non sostituirlo o interromperlo continuamente.",
+                        bad: "<div class='doc-p' style='text-align:justify;'>Gli elefanti <img src='https://www.focusjunior.it/content/uploads/2017/04/elefante-africano-1.jpg' style='width:200px; float:left; margin:5px; border:1px solid #999;'> sono i più grandi mammiferi terrestri attualmente esistenti. Caratterizzati da una lunga proboscide <img src='https://www.focusjunior.it/content/uploads/2017/04/elefante-africano-1-1.jpg' style='width:200px; float:right; margin:5px; border:1px solid #999;'>, grandi orecchie e zanne d'avorio, questi animali straordinari possiedono un'intelligenza e una memoria notevoli. Vivono in complessi gruppi <img src='https://keeptheplanet.org/wp-content/uploads/2020/08/elefanti-1024x678.jpg' style='width:200px; display:inline-block; margin:5px; border:1px solid #999;'> sociali matriarcali, dove le femmine e i cuccioli restano insieme per tutta la vita, mentre i maschi tendono a condurre una vita più solitaria una volta raggiunta la maturità. La loro dieta è esclusivamente erbivora <img src='https://www.focus.it/images/2024/10/10/elefante_1020x680.jpg' style='width:200px; float:left; margin:5px; border:1px solid #999;'> e trascorrono gran parte della giornata mangiando enormi quantità di vegetali per sostenere la loro mole imponente. Purtroppo, sono minacciati dal bracconaggio e dalla perdita di habitat, rendendo la loro conservazione una priorità globale.</div>",
+                        good: "<div style='overflow:hidden;'><img src='https://www.focusjunior.it/content/uploads/2017/04/elefante-africano-1.jpg' style='float:right; width:200px; margin-left:20px; margin-bottom:10px; border-radius:4px; border:1px solid #1a73e8;'><div class='doc-p' style='text-align:justify;'>Gli elefanti sono i più grandi mammiferi terrestri attualmente esistenti. Caratterizzati da una lunga proboscide, grandi orecchie e zanne d'avorio, questi animali straordinari possiedono un'intelligenza e una memoria notevoli. Vivono in complessi gruppi sociali matriarcali, dove le femmine e i cuccioli restano insieme per tutta la vita, mentre i maschi tendono a condurre una vita più solitaria una volta raggiunta la maturità. La loro dieta è esclusivamente erbivora e trascorrono gran parte della giornata mangiando enormi quantità di vegetali per sostenere la loro mole imponente. Purtroppo, sono minacciati dal bracconaggio e dalla perdita di habitat, rendendo la loro conservazione una priorità globale.</div></div>"
                     },
                     {
                         title: "Ridimensiona gli elementi grafici in modo che si adattino al documento.",
                         explanation: "Non inserire immagini gigantesche che occupano tutto il foglio se non è strettamente necessario.",
-                        bad: "<div style='width:800px; height:100px; background:#eee; overflow:hidden;'>IMMAGINE TROPPO LARGA</div><div class='doc-p'>In questo caso l'immagine esce dai bordi del foglio, costringendo il lettore a scrollare orizzontalmente o stampando solo una parte della figura.</div>",
-                        good: "<div style='width:100%; max-width:400px; height:100px; background:#e8f0fe; border:1px solid #1a73e8; display:flex; align-items:center; justify-content:center;'>DIMENSIONE CORRETTA</div><div class='doc-p'>Scalando l'immagine in base ai margini del documento, manteniamo l'armonia della pagina e la leggibilità totale.</div>"
+                        bad: "<div style='width:50%; margin:0 auto; border:1px solid #ddd; background:white; position:relative; z-index:1; box-shadow:0 2px 5px rgba(0,0,0,0.1);'><img src='https://img.freepik.com/premium-photo/vertical-portrait-african-elephant-savanna_242170-177.jpg' style='width:200%; max-width:none; margin-left:-50%; display:block;'></div><div class='doc-p' style='margin-top:20px;'>L'immagine è troppo grande e fuoriesce dai margini del foglio, coprendo potenzialmente altri contenuti o venendo tagliata in stampa.</div>",
+                        good: "<div style='width:50%; margin:0 auto; border:1px solid #ddd; background:white; overflow:hidden; box-shadow:0 2px 5px rgba(0,0,0,0.1);'><img src='https://img.freepik.com/premium-photo/vertical-portrait-african-elephant-savanna_242170-177.jpg' style='width:100%; display:block;'></div><div class='doc-p'>Qui invece l'immagine è stata ridimensionata al 100% della larghezza del contenitore, adattandosi perfettamente allo spazio disponibile.</div>"
                     },
                     {
                         title: "Assicurati che gli elementi grafici siano coerenti con lo stile generale.",
-                        explanation: "Se il documento è formale, evita clip-art infantili o disegni a mano libera disordinati.",
-                        bad: "<div style='font-family:serif; color:#333; height:100px;'>RELAZIONE SCIENTIFICA<br><span style='font-size:40px;'>🤡</span><br>L'uso di emoji colorate e informali rompe il tono professionale richiesto da una relazione accademica.</div>",
-                        good: "<div style='font-family:serif; color:#333; height:100px;'>RELAZIONE SCIENTIFICA<br><div style='width:60px; height:40px; border:1px solid #333; display:flex; align-items:center; justify-content:center; font-size:10px;'>FIG. 1</div><br>Uno schema pulito ed essenziale si integra perfettamente con il linguaggio formale del testo.</div>"
+                        explanation: "Se il documento è formale, evita stili eccentrici, effetti artistici non richiesti o clip-art stonata.",
+                        bad: "<div style='text-align:center;'><h3 style='font-family:serif;'>REPORT ZOOLOGICO</h3><img src='https://www.focusjunior.it/content/uploads/2017/04/elefante-africano-1.jpg' style='width:150px; border-radius:50%; border:5px dashed red; transform:rotate(-5deg); filter:hue-rotate(90deg);'><div class='doc-p'>Effetti grafici, rotazioni e colori innaturali non si addicono a un documento scientifico o professionale.</div></div>",
+                        good: "<div style='text-align:center;'><h3 style='font-family:serif;'>REPORT ZOOLOGICO</h3><img src='https://www.focusjunior.it/content/uploads/2017/04/elefante-africano-1.jpg' style='width:150px; border:1px solid #333; box-shadow:0 4px 6px rgba(0,0,0,0.1);'><div class='doc-p'>Un'immagine pulita, con un bordo semplice e colori naturali, si integra perfettamente nel contesto formale.</div></div>"
                     }
                 ]
             },
@@ -668,14 +668,14 @@
                     {
                         title: "Mantieni le tabelle semplici, con bordi leggeri e formattazione coerente.",
                         explanation: "Le tabelle servono a confrontare dati. Più sono pulite, più il confronto è immediato.",
-                        bad: "<table border='10' style='background:black; color:yellow;'><tr><td>DATI</td></tr></table>",
-                        good: "<table style='border-collapse:collapse; width:100%; text-align:left;'><tr style='background:#f1f3f4; font-weight:bold; border-bottom:2px solid #ddd;'><td style='padding:10px;'>CATEGORIA</td><td style='padding:10px;'>VALORE</td></tr><tr><td style='padding:10px; border-bottom:1px solid #eee;'>Prestazioni</td><td style='padding:10px; border-bottom:1px solid #eee;'>Ottime</td></tr></table>"
+                        bad: "<table border='5' cellpadding='10' cellspacing='5' style='background:black; color:lime; width:100%; border-color:red; font-family:Comic Sans MS;'><tr><td align='center'><b>COMPONENTE</b></td><td align='center'><b>SPECIFICHE</b></td><td align='center'><b>VOTO</b></td></tr><tr><td>CPU</td><td>Intel i9</td><td>10/10</td></tr><tr><td>RAM</td><td>32GB DDR5</td><td>9/10</td></tr><tr><td>GPU</td><td>RTX 4090</td><td>10/10</td></tr><tr><td>SSD</td><td>2TB NVMe</td><td>9/10</td></tr></table><div class='doc-p'>L'uso di colori troppo forti, bordi spessi e font poco seri rende la tabella illeggibile e caotica.</div>",
+                        good: "<table style='border-collapse:collapse; width:100%; text-align:left; font-size:13px;'><tr style='background:#f1f3f4; border-bottom:2px solid #ccc;'><th style='padding:8px;'>Componente</th><th style='padding:8px;'>Specifiche</th><th style='padding:8px;'>Voto</th></tr><tr><td style='padding:8px; border-bottom:1px solid #eee;'>CPU</td><td style='padding:8px; border-bottom:1px solid #eee;'>Intel i9</td><td style='padding:8px; border-bottom:1px solid #eee;'>10/10</td></tr><tr><td style='padding:8px; border-bottom:1px solid #eee;'>RAM</td><td style='padding:8px; border-bottom:1px solid #eee;'>32GB DDR5</td><td style='padding:8px; border-bottom:1px solid #eee;'>9/10</td></tr><tr><td style='padding:8px; border-bottom:1px solid #eee;'>GPU</td><td style='padding:8px; border-bottom:1px solid #eee;'>RTX 4090</td><td style='padding:8px; border-bottom:1px solid #eee;'>10/10</td></tr><tr><td style='padding:8px;'>SSD</td><td style='padding:8px;'>2TB NVMe</td><td style='padding:8px;'>9/10</td></tr></table><div class='doc-p'>Una tabella pulita con bordi leggeri e spaziatura adeguata permette una lettura immediata dei dati.</div>"
                     },
                     {
                         title: "Scegli elenchi per rappresentare schematicamente le idee.",
                         explanation: "Elenchi puntati per idee sparse, numerati se c'è una priorità o un ordine temporale.",
                         bad: "<div class='doc-p'>In questo esempio elenchiamo i vantaggi del software come se fossero una sequenza ordinata (1, 2, 3), anche se non c'è un ordine preciso: 1. Velocità, 2. Sicurezza, 3. Gratuito.</div>",
-                        good: "<ul><li>Velocità</li><li>Sicurezza</li><li>Gratuità</li></ul><div class='doc-p'>L'elenco puntato è la scelta corretta per presentare un insieme di caratteristiche senza una gerarchia temporale.</div>"
+                        good: "<ul style='padding-left:20px; margin:0;'><li>Velocità</li><li>Sicurezza</li><li>Gratuità</li></ul><div class='doc-p'>L'elenco puntato è la scelta corretta per presentare un insieme di caratteristiche senza una gerarchia temporale.</div>"
                     },
                     {
                         title: "Utilizza formule e simboli per concetti matematici.",
@@ -688,6 +688,12 @@
                         explanation: "Sfrutta le potenzialità digitali dei moderni editor (es. blocchi di codice per la programmazione).",
                         bad: "<div style='font-family:serif;'>for i in range(10): print(i)</div><div class='doc-p'>In questo caso il codice è scritto con un font normale: è difficile distinguerlo dal resto del testo.</div>",
                         good: "<div style='background:#272822; color:#f8f8f2; padding:15px; border-radius:8px; font-family:monospace;'>for i in range(10):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)</div><div class='doc-p'>Utilizzando un blocco scuro e un font monospazio, il codice spicca chiaramente come elemento tecnico.</div>"
+                    },
+                    {
+                        title: "Sposta i dettagli secondari nelle note a piè di pagina.",
+                        explanation: "Se una spiegazione è lunga o tecnica e interrompe il flusso, spostala in basso. Il testo principale deve scorrere fluido.",
+                        bad: "<div class='doc-p'>La CPU (Central Processing Unit, ovvero l'unità centrale di elaborazione che coordina tutte le attività del computer eseguendo istruzioni aritmetiche e logiche fondamentali per il funzionamento del software) è il cervello del computer.</div><div class='doc-p'>L'inciso tra parentesi è così lungo che il lettore perde il filo della frase principale.</div>",
+                        good: "<div class='doc-p'>La CPU<sup>1</sup> è il cervello del computer. Spostando la definizione in nota, la frase principale rimane pulita, immediata e perfettamente leggibile per tutti.</div><div style='margin-top:20px; border-top:1px solid #ccc; padding-top:5px; font-size:11px; color:#666;'>1. Central Processing Unit: unità che coordina le attività eseguendo istruzioni logico-aritmetiche.</div>"
                     }
                 ]
             },
@@ -703,14 +709,14 @@
                     {
                         title: "Scegli il tipo di linguaggio da usare in base allo scopo.",
                         explanation: "Semplice e diretto per gli studenti, tecnico e preciso per i colleghi o contesti formali.",
-                        bad: "<div class='doc-p'>Dobbiamo computare l'algoritmo ricorsivamente per iterare il dataset. (Troppo difficile per un principiante)</div>",
-                        good: "<div class='doc-p'>Dobbiamo ripetere i calcoli finché non abbiamo finito tutti i dati a disposizione. (Semplice e chiaro)</div>"
+                        bad: "<div style='font-size:14px; font-weight:bold; color:#555; margin-bottom:5px;'>DESTINATARI: STUDENTI DI LICEO</div><div style='background:#f9f9f9; padding:15px; border-left:4px solid #d93025;'><p style='margin:0;'>\"L'esemplare di <i>Loxodonta africana</i> presenta un marcato dimorfismo sessuale e una proboscide prensile derivante dalla fusione di naso e labbro superiore, utilizzata per la manipolazione fine e l'olfatto.\"</p></div><div class='doc-p'>Questo linguaggio è corretto scientificamente, ma il registro è troppo elevato e rischia di confondere o annoiare la classe.</div>",
+                        good: "<div style='font-size:14px; font-weight:bold; color:#555; margin-bottom:5px;'>DESTINATARI: STUDENTI DI LICEO</div><div style='background:#f9f9f9; padding:15px; border-left:4px solid #1a73e8;'><p style='margin:0;'>\"L'elefante africano è facile da riconoscere: i maschi sono molto più grandi delle femmine. La sua famosa proboscide è in realtà un naso allungato che usa come una mano per afferrare oggetti.\"</p></div><div class='doc-p'>La stessa informazione, espressa con termini semplici, diventa immediatamente comprensibile e utile per l'apprendimento.</div>"
                     },
                     {
                         title: "Considera la leggibilità anche su altri dispositivi (smartphone/tablet).",
-                        explanation: "Molti leggeranno il tuo PDF sul telefono: usa font chiari e tabelle non troppo larghe.",
-                        bad: "<div style='width:1200px; background:#eee;'>TABELLA LARGHISSIMA CHE RICHIEDE SCROLL LATERALE</div>",
-                        good: "<div style='width:100%; max-width:500px; background:#e8f0fe;'>TABELLA RESPONSIVE CHE SI ADATTA ALLO SCHERMO</div>"
+                        explanation: "Molti leggeranno il tuo PDF sul telefono: usa font chiari e colonne non troppo larghe.",
+                        bad: "<div style='width:200px; height:300px; border:4px solid #333; border-radius:10px; overflow:auto; background:white; position:relative; margin:0 auto;'><div style='width:400px; padding:10px; font-size:8px;'>Questo testo è minuscolo (8px) e strutturato su una colonna troppo larga. L'utente deve zoomare e scorrere orizzontalmente per leggere ogni riga, rendendo l'esperienza frustrante e lenta. Inoltre, la tabella qui sotto esce dallo schermo:<br><table border='1' style='width:300px; margin-top:5px;'><tr><td>Dato A</td><td>Dato B</td><td>Dato C</td></tr></table></div></div><div class='doc-p'>Simulazione smartphone: testo illeggibile senza zoom e contenuti che 'sbordano'.</div>",
+                        good: "<div style='width:200px; height:300px; border:4px solid #333; border-radius:10px; overflow:hidden; background:white; margin:0 auto;'><div style='padding:10px; font-size:12px; line-height:1.4;'>Questo testo è leggibile (12px) e si adatta perfettamente alla larghezza dello schermo. Non serve scorrere orizzontalmente.<br><table style='width:100%; margin-top:10px; border-collapse:collapse; font-size:10px;'><tr style='background:#f1f3f4;'><td style='padding:4px;'>A</td><td style='padding:4px;'>B</td></tr><tr><td style='padding:4px; border-bottom:1px solid #eee;'>10</td><td style='padding:4px; border-bottom:1px solid #eee;'>20</td></tr></table></div></div><div class='doc-p'>Simulazione smartphone: layout responsive che garantisce una lettura fluida.</div>"
                     }
                 ]
             },
@@ -719,13 +725,13 @@
                 items: [
                     {
                         title: "Usa l’intestazione per inserire il titolo, l'autore o il nome della sezione.",
-                        explanation: "L'intestazione si ripete in ogni pagina, ricordando al lettore dove si trova.",
+                        explanation: "L'intestazione si ripete in ogni pagina. Deve essere scritta con uno stile 'meno evidente' (es. grigio o font più piccolo) per distinguerla nettamente dal corpo del testo.",
                         bad: "<div class='doc-p'>In questo esempio manca l'intestazione: arrivati a pagina 10, il lettore potrebbe aver dimenticato il titolo del documento che sta leggendo.</div>",
                         good: "<div style='display:flex; justify-content:space-between; border-bottom:1px solid #ccc; font-size:12px; color:gray; margin-bottom:20px; padding-bottom:5px;'><span>Architettura di Von Neumann - La CPU</span><span>Patrick Militello</span></div><div class='doc-p'>L'intestazione fissa garantisce che il contesto del documento e l'autore siano sempre visibili in ogni foglio.</div>"
                     },
                     {
                         title: "Usa il piè di pagina per numerare le pagine.",
-                        explanation: "Senza numeri di pagina, è impossibile citare parti del documento o riordinare i fogli caduti.",
+                        explanation: "Senza numeri di pagina è impossibile orientarsi. Anche questi elementi devono essere discreti e visivamente meno evidenti del testo principale.",
                         bad: "<div class='doc-p'>In questo foglio manca il numero di pagina: se i documenti venissero stampati e mescolati, sarebbe impossibile ricostruire l'ordine.</div>",
                         good: "<div class='doc-p'>Grazie alla numerazione automatica nel piè di pagina, il documento è sempre facile da consultare e ordinare.</div><div style='text-align:center; margin-top:30px; border-top:1px solid #eee; padding-top:10px; font-size:12px; color:#888;'>- Pagina 5 di 12 -</div>"
                     },
